@@ -1,0 +1,192 @@
+---
+title: "Scoring"
+author: "Colton Cronin"
+date: "April 5, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+setwd("C:/Users/Colton/Documents/MVPBallots")
+# al_03 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+ nl_2002 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_05 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_06 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_07 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_08 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_09 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_10 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_11 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_12 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_13 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_14 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_15 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_16 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_17 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# al_18 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# 
+# nl_03 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_04 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_05 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_06 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_07 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_08 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_09 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_10 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_11 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_12 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_13 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_14 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_15 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_16 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_17 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+# nl_18 <- read.csv("C:/Users/Colton/Documents/MVPBallots/nl_2002.csv")
+
+
+bbwaa_scoring <- c(14,9,8,7,6,5,4,3,2,1)
+consistent <- c(10,9,8,7,6,5,4,3,2,1)
+only_10 <- c(10,0,0,0,0,0,0,0,0,0)
+gap_13 <- c(13,9,8,7,6,5,4,3,2,1)
+gap_12 <- c(12,9,8,7,6,5,4,3,2,1)
+gap_11 <- c(11,9,8,7,6,5,4,3,2,1)
+gap_13_11_9_7 <- c(13,11,9,7,6,5,4,3,2,1)
+gap_13_12_8 <- c(13,12,8,7,6,5,4,3,2,1)
+benoit_1 <- c(15.5,10.5,6.5,5,4.5,4.2,3.9,3.5,2,1)
+benoit_2 <- c(15.5,10.5,8,6,5,4,3,2,1,.5)
+benoit_4 <- c(10,7,5,3,1,0,0,0,0,0)
+
+current_data <- nl_2002
+current_data[is.na(current_data)] <- 0
+
+current_scheme <- bbwaa_scoring
+bbwaa_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  bbwaa_totals[player_num] = player_total
+}
+
+
+current_scheme <- consistent
+consistent_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  consistent_totals[player_num] = player_total
+}
+
+current_scheme <- only_10
+only_10_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  only_10_totals[player_num] = player_total
+}
+
+current_scheme <- gap_13
+gap_13_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  gap_13_totals[player_num] = player_total
+}
+
+current_scheme <- gap_12
+gap_12_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  gap_12_totals[player_num] = player_total
+}
+
+current_scheme <- gap_11
+gap_11_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  gap_11_totals[player_num] = player_total
+}
+
+current_scheme <- gap_13_11_9_7
+gap_13_11_9_7totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  gap_13_11_9_7totals[player_num] = player_total
+}
+
+current_scheme <- gap_13_12_8
+gap_13_12_8totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  gap_13_12_8totals[player_num] = player_total
+}
+
+current_scheme <- benoit_1
+benoit_1_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  benoit_1_totals[player_num] = player_total
+}
+
+current_scheme <- benoit_2
+benoit_2_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  benoit_2_totals[player_num] = player_total
+}
+
+current_scheme <- benoit_4
+benoit_4_totals <- 1:nrow(current_data)
+for (player_num in 1:nrow(current_data)) {
+  player_total = 0
+  for (rank in 1:10) {
+    player_total = player_total + current_data[player_num, rank + 2] * current_scheme[rank]
+  }
+  print(player_total)
+  benoit_4_totals[player_num] = player_total
+}
+
+
+current_data<- cbind(current_data, bbwaa_totals, consistent_totals, only_10_totals, gap_13_totals, gap_12_totals, gap_11_totals, gap_13_11_9_7totals, gap_13_12_8totals, benoit_1_totals, benoit_2_totals, benoit_4_totals)
+print(current_data)
+write.csv(current_data, "nl_2002_rankings.csv")
+
+
+```
